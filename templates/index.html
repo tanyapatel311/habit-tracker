@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Daily Habit Tracker</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>Daily Habit Tracker</h1>
+
+    <a class="button" href="/new">+ Add task</a>
+
+    {% if todos|length == 0 %}
+      <p>No tasks yet. Add one!</p>
+    {% else %}
+      <ul class="list">
+        {% for t in todos %}
+          <li class="item">
+            {{ t.title }}
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</body>
+</html>
