@@ -2,26 +2,54 @@
 <html>
 <head>
   <meta charset="utf-8" />
-  <title>Daily Habit Tracker Website</title>
+  <title>Daily Habit Tracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="container">
-    <h1>Daily Habit Tracker Wesbite</h1>
+  <div class="page">
+    <div class="card">
+      <div class="header">
+        <div>
+          <h1>Daily Habit Tracker</h1>
+          <p class="subtitle">Teeny wins add up ✨</p>
+        </div>
+        <a class="button" href="/new">+ Add task</a>
+      </div>
 
-    <a class="button" href="/new">+ Add task</a>
+      {% if todos|length == 0 %}
+        <div class="empty">
+          <div class="empty-emoji">🫧</div>
+          <p>No tasks yet. Add one and get your day rolling.</p>
+        </div>
+      {% else %}
+        <ul class="list">
+          {% for t in todos %}
+            <li class="item {% if t.done %}done{% endif %}">
+              <!-- Toggle done -->
+              <form method="POST" action="/toggle/{{ t._id }}" class="toggle-form">
+                <button type="submit" class="checkbox" aria-label="Toggle complete">
+                  {% if t.done %}
+                    <span class="checkmark">✓</span>
+                  {% else %}
+                    <span class="checkmark hidden">✓</span>
+                  {% endif %}
+                </button>
+              </form>
 
-    {% if todos|length == 0 %}
-      <p>No tasks yet. Add one!</p>
-    {% else %}
-      <ul class="list">
-        {% for t in todos %}
-          <li class="item">
-            {{ t.title }}
-          </li>
-        {% endfor %}
-      </ul>
-    {% endif %}
+              <div class="title">{{ t.title }}</div>
+
+              <!-- Delete -->
+              <form method="POST" action="/delete/{{ t._id }}" class="delete-form">
+                <button type="submit" class="trash" aria-label="Delete task" title="Delete">
+                  🗑
+                </button>
+              </form>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+    </div>
   </div>
 </body>
 </html>

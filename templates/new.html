@@ -3,18 +3,25 @@
 <head>
   <meta charset="utf-8" />
   <title>Add Task</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <div class="container">
-    <h1>Add a task</h1>
+  <div class="page">
+    <div class="card">
+      <div class="header">
+        <div>
+          <h1>Add a task</h1>
+          <p class="subtitle">Keep it simple. One line is perfect.</p>
+        </div>
+        <a class="button ghost" href="/">← Back</a>
+      </div>
 
-    <form method="POST" action="/add">
-      <input name="title" placeholder="e.g., Drink water" required />
-      <button type="submit">Add</button>
-    </form>
-
-    <p><a href="/">← Back</a></p>
+      <form method="POST" action="/add" class="add-form">
+        <input name="title" class="input" placeholder="e.g., Drink water, Do homework, Walk 10 min" required />
+        <button type="submit" class="button">Add</button>
+      </form>
+    </div>
   </div>
 </body>
 </html>
