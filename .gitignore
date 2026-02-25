@@ -1,0 +1,6 @@
+.env
+.venv/
+__pycache__/
+
+github_actions_ec2
+github_actions_ec2.pub
